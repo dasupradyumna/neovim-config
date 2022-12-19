@@ -1,6 +1,5 @@
-require 'options'
-require 'remap'
-
---[[
-  adapt remaining commands / remaps from "mydotfiles/.vim/general.vim"
---]]
+-- Load user configuration
+require 'kenja.option'
+require 'kenja.remap'
+require 'kenja.plugin'
+require 'kenja.autocommand'
