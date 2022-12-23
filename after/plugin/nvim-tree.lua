@@ -1,6 +1,8 @@
+-------- nvim-tree config --------
+
 local km = require 'kenja.utils.keymapper'
 
--- disable netrw before configuration
+-- disable netrw before configuring nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -14,7 +16,14 @@ local config = {
   diagnostics = {
     enable = true,
     show_on_dirs = true,
-    show_on_open_dirs = false
+    show_on_open_dirs = false,
+    -- same icons as lsp-zero, for consistency
+    icons = {
+      error = '✘',
+      warning = '▲',
+      hint = '⚑',
+      info = '',
+    },
   },
   git = { show_on_open_dirs = false },
   -- custom key bindings within the NvimTree buffer
@@ -25,15 +34,17 @@ local config = {
   end,
   view = {
     adaptive_size = true,
-    float = { enable = true }
+    float = { enable = true },
   },
   renderer = {
     group_empty = true,
     highlight_git = true,
     highlight_opened_files = 'icon',
-    root_folder_label = function(root) return vim.fn.fnamemodify(root, ":~") end,
+    root_folder_label = function(root)
+      return vim.fn.fnamemodify(root, ':~')
+    end,
     indent_markers = { enable = true },
-    icons = { show = { folder_arrow = false, git = false } }
+    icons = { show = { folder_arrow = false, git = false } },
   },
   live_filter = { always_show_folders = false },
   tab = { sync = { open = true, close = true } },
@@ -45,9 +56,9 @@ local config = {
       copy_paste = true,
       diagnostics = true,
       git = true,
-      watcher = true
-    }
-  }
+      watcher = true,
+    },
+  },
 }
 
 require('nvim-tree').setup(config)

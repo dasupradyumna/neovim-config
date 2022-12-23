@@ -1,29 +1,41 @@
-local km = require 'kenja.utils.keymapper'
+-------- custom keybindings --------
 
+local km = require 'kenja.utils.keymapper'
 vim.g.mapleader = ' '
 
--- Basic
+-- general
 km.inoremap('<C-c>', '<C-[>')
 km.noremap(';', ':')
 km.noremap(':', ';')
 km.nnoremap('<C-u>', '<C-u>zz')
 km.nnoremap('<C-d>', '<C-d>zz')
+
+-- code editing
+km.nnoremap('<leader>o', 'o<Esc>')
+km.nnoremap('<leader>O', 'O<Esc>')
 km.nnoremap('K', 'i<CR><Esc>')
 
--- System clipboard
+-- access bash history
+km.nnoremap('<leader>bh', ':edit ~/.bash_history<CR>')
+
+-- system clipboard
 km.noremap('<leader>cc', '"+y')
 km.noremap('<leader>cp', '"+p')
 
--- Search
+-- open terminal in split
+km.nnoremap('<leader>tv', ':vsplit term://bash<CR>')
+km.nnoremap('<leader>th', ':split term://bash<CR>')
+
+-- search
 km.nnoremap('n', 'nzz')
 km.nnoremap('N', 'Nzz')
 km.nnoremap('<leader>/', ':nohlsearch<CR>', { silent = true })
 
--- Windows
+-- window navigation
 km.nnoremap('<C-h>', '<C-w>h')
 km.nnoremap('<C-j>', '<C-w>j')
 km.nnoremap('<C-k>', '<C-w>k')
 km.nnoremap('<C-l>', '<C-w>l')
 
--- NvimTree
-km.nnoremap('<leader>t', ':NvimTreeToggle<CR>', { silent = true })
+-- file explorer
+km.nnoremap('<leader>fe', ':NvimTreeToggle<CR>', { silent = true })

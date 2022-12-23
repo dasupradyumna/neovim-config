@@ -1,35 +1,44 @@
--- Basic
-vim.opt.updatetime = 100  -- wait time for CursorHold event and saving .swp
-vim.opt.mouse = ''
+-------- builtin options --------
 
--- Display
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 10
+local options = {
+  -- basic
+  updatetime = 100, -- wait time for CursorHold event and saving .swp
+  mouse = '',
 
--- Colorscheme
-vim.opt.termguicolors = true  -- use 24-bit colors instead of 8-bit
+  -- display
+  number = true,
+  relativenumber = true,
+  scrolloff = 10,
+  signcolumn = 'yes',
 
--- Search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hlsearch = true
+  -- color
+  termguicolors = true, -- use 24-bit colors instead of 8-bit
 
--- Command-mode auto-complete
-vim.opt.wildignorecase = true
-vim.opt.wildignore = '*.swp,*.bak,*.pyc'
-vim.opt.wildmode = 'longest:full,full'
+  -- search
+  ignorecase = true,
+  smartcase = true,
+  hlsearch = true,
 
--- Indentation
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2  -- indentation size
-vim.opt.softtabstop = 2  -- virtual tab during editing
-vim.opt.tabstop = 2  -- tab size set for file
+  -- command-line completion
+  wildignorecase = true,
+  wildignore = '*.swp,*.bak,*.pyc',
+  wildmode = 'longest:full,full',
 
--- Whitespace
-vim.opt.list = true
-vim.opt.listchars = 'trail:.'
+  -- indentation
+  expandtab = true,
+  shiftwidth = 2, -- indentation size
+  softtabstop = 2, -- virtual tab during editing
+  tabstop = 2, -- tab size set for file
 
--- Windows
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+  -- whitespace
+  list = true,
+  listchars = 'trail:.',
+
+  -- windows
+  splitbelow = true,
+  splitright = true,
+}
+
+for k, v in pairs(options) do
+  vim.opt[k] = v
+end
