@@ -10,8 +10,18 @@ local function init(use)
   -- colorscheme
   use 'projekt0n/github-nvim-theme'
 
+  -- git
+  use 'lewis6991/gitsigns.nvim'
+
   -- file explorer
   use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
+
+  -- fuzzy finder
+  use {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
 
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

@@ -61,4 +61,7 @@ local config = {
   },
 }
 
+-- toggle nvim-tree floating window
+km.nnoremap('<leader>fe', ':NvimTreeToggle<CR>', { silent = true })
+
 require('nvim-tree').setup(config)

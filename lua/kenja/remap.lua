@@ -32,10 +32,8 @@ km.nnoremap('N', 'Nzz')
 km.nnoremap('<leader>/', ':nohlsearch<CR>', { silent = true })
 
 -- window navigation
+km.nnoremap('<C-p>', '<C-w>p')
 km.nnoremap('<C-h>', '<C-w>h')
 km.nnoremap('<C-j>', '<C-w>j')
 km.nnoremap('<C-k>', '<C-w>k')
 km.nnoremap('<C-l>', '<C-w>l')
-
--- file explorer
-km.nnoremap('<leader>fe', ':NvimTreeToggle<CR>', { silent = true })
