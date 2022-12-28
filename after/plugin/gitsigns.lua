@@ -1,6 +1,5 @@
 -------- gitsigns config --------
 
-local km = require 'kenja.utils.keymapper'
 local gs = require 'gitsigns'
 
 -- configuration table
@@ -11,15 +10,19 @@ local config = {
 
   -- user keybindings
   on_attach = function(bufnr)
+    local km = require 'kenja.utils.keymapper'
     local opts = { buffer = bufnr }
+    km.nnoremap('<leader>gd', gs.diffthis, opts)
+    km.nnoremap('<leader>gD', function()
+      gs.diffthis 'HEAD'
+    end, opts)
+    km.nnoremap('<leader>gb', gs.show, opts)
+    km.nnoremap('<leader>gl', gs.toggle_current_line_blame, opts)
     km.nnoremap('<leader>gp', gs.preview_hunk_inline, opts)
-    km.nnoremap('<leader>gbd', gs.diffthis, opts)
-    km.nnoremap('<leader>gbs', gs.show, opts)
-    km.nnoremap('<leader>gbb', gs.toggle_current_line_blame, opts)
-    km.nnoremap('<leader>ghp', gs.prev_hunk, opts)
-    km.nnoremap('<leader>ghn', gs.next_hunk, opts)
-    km.nnoremap('<leader>ghs', gs.stage_hunk, opts)
-    km.nnoremap('<leader>ghr', gs.reset_hunk, opts)
+    km.nnoremap('<leader>gN', gs.prev_hunk, opts)
+    km.nnoremap('<leader>gn', gs.next_hunk, opts)
+    km.nnoremap('<leader>gs', gs.stage_hunk, opts)
+    km.nnoremap('<leader>gr', gs.reset_hunk, opts)
   end,
 }
 

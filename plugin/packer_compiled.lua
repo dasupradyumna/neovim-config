@@ -74,10 +74,20 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FTerm.nvim"] = {
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/FTerm.nvim",
+    url = "https://github.com/numToStr/FTerm.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/kenja/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["auto-session"] = {
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -118,6 +128,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kenja/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    config = { "\27LJ\2\2[\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\1\25show_current_context\2\nsetup\21indent_blankline\frequire\0" },
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["leap.nvim"] = {
+    config = { "\27LJ\2\2A\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0" },
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/leap.nvim",
+    url = "https://github.com/ggandor/leap.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -175,6 +197,11 @@ _G.packer_plugins = {
     path = "/home/kenja/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["session-lens"] = {
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/session-lens",
+    url = "https://github.com/rmagatti/session-lens"
+  },
   ["stylua-nvim"] = {
     loaded = true,
     path = "/home/kenja/.local/share/nvim/site/pack/packer/start/stylua-nvim",
@@ -184,10 +211,23 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kenja/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/kenja/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: leap.nvim
+time([[Config for leap.nvim]], true)
+try_loadstring("\27LJ\2\2A\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0", "config", "leap.nvim")
+time([[Config for leap.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\2[\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\1\25show_current_context\2\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

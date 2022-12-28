@@ -11,6 +11,7 @@ local config = {
   open_on_setup = true,
   sort_by = 'name',
   hijack_cursor = true,
+  sync_root_with_cwd = true,
   reload_on_bufenter = true,
   update_focused_file = { enable = true },
   diagnostics = {
