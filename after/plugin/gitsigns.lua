@@ -21,8 +21,12 @@ local config = {
     km.nnoremap('<leader>gp', gs.preview_hunk_inline, opts)
     km.nnoremap('<leader>gN', gs.prev_hunk, opts)
     km.nnoremap('<leader>gn', gs.next_hunk, opts)
+    km.nnoremap('<leader>gu', gs.undo_stage_hunk, opts)
     km.nnoremap('<leader>gs', gs.stage_hunk, opts)
-    km.nnoremap('<leader>gr', gs.reset_hunk, opts)
+    km.nnoremap('<leader>gS', gs.stage_buffer, opts)
+    km.nnoremap('<leader>grh', gs.reset_hunk, opts)
+    km.nnoremap('<leader>grb', gs.reset_buffer, opts)
+    km.nnoremap('<leader>gri', gs.reset_buffer_index, opts)
   end,
 }
 

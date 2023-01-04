@@ -1,25 +1,36 @@
 -------- user autocommands --------
 
--- user autogroup
-vim.api.nvim_create_augroup('Kenja', { clear = true })
+local auto = require 'kenja.utils.autocommand'
 
--- trim all trailing whitespaces
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = 'Kenja',
-  desc = 'Trim trailing whitespace before writing to disk',
-  callback = function()
+-- user autogroup
+auto.group('Kenja', true)
+
+auto.command(
+  'Update all buffers that have been externally modified',
+  'Kenja',
+  'CursorHold',
+  '*',
+  'checktime'
+)
+
+auto.command(
+  'Trim all trailing whitespace before writing buffer to disk',
+  'Kenja',
+  'BufWritePre',
+  '*',
+  function()
     if vim.opt.filetype:get() ~= 'markdown' then
       local view = vim.fn.winsaveview()
       vim.cmd [[%s:\s\+$::e]]
       vim.fn.winrestview(view)
     end
-  end,
-})
+  end
+)
 
--- sync packer.nvim packages
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'Kenja',
-  desc = 'Update packer.nvim packages when config file changes',
-  pattern = vim.fn.stdpath 'config' .. '/lua/kenja/plugin.lua',
-  command = 'source % | PackerSync',
-})
+auto.command(
+  'Sync packer.nvim plugins when config file is changed',
+  'Kenja',
+  'BufWritePost',
+  vim.fn.stdpath 'config' .. '/lua/kenja/plugin.lua',
+  'source % | PackerSync'
+)

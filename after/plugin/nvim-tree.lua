@@ -46,6 +46,7 @@ local config = {
     end,
     indent_markers = { enable = true },
     icons = { show = { folder_arrow = false, git = false } },
+    special_files = {},
   },
   live_filter = { always_show_folders = false },
   tab = { sync = { open = true, close = true } },

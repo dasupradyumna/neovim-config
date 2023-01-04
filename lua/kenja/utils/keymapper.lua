@@ -1,4 +1,4 @@
--------- keybinding helper --------
+-------- keymapping helper --------
 
 -- map function for vim-like syntax
 local function map_binder(mode, remap)

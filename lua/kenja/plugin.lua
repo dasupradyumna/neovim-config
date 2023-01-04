@@ -2,8 +2,6 @@
 
 vim.cmd.packadd 'packer.nvim' -- since packer is configured to lazy-load
 
-local packer = require 'packer'
-
 -- initialization function
 local function init(use)
   -- packer handles itself
@@ -52,7 +50,7 @@ local function init(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
 
-  -- lsp
+  -- language server
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -73,8 +71,14 @@ local function init(use)
     },
   }
 
+  -- debug adapter
+  use { 'rcarriga/nvim-dap-ui', requires = 'mfussenegger/nvim-dap' }
+
   -- formatting
   use 'ckipp01/stylua-nvim'
+
+  -- linting
+  use 'mfussenegger/nvim-lint'
 end
 
-packer.startup(init)
+require('packer').startup(init)

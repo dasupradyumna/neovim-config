@@ -9,7 +9,10 @@ lsp.set_preferences {
 }
 
 -- language-specific configurations
-require('language.lua').config(lsp)
+local format_funcs = {
+  lua = require('language.lua').lsp_config(lsp),
+  python = require('language.python').lsp_config(lsp),
+}
 
 -- completion keybindings
 local cmp = require 'cmp'
@@ -60,6 +63,7 @@ lsp.on_attach(function(_, bufnr)
   km.nnoremap('gR', vim.lsp.buf.references, opts)
   km.nnoremap('gs', vim.lsp.buf.document_symbol, opts)
   km.nnoremap('gS', vim.lsp.buf.workspace_symbol, opts)
+  km.nnoremap('gf', format_funcs[vim.fn.getbufvar(vim.fn.bufnr(), '&filetype')])
 end)
 
 lsp.setup()

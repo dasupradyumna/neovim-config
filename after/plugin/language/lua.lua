@@ -1,7 +1,7 @@
------------- lua configuration ------------
+------------ lua config ------------
 
 return {
-  config = function(lsp)
+  lsp_config = function(lsp)
     -- sumneko_lua server
     lsp.nvim_workspace()
     lsp.configure('sumneko_lua', {
@@ -20,13 +20,11 @@ return {
       config_file = vim.fn.stdpath 'config' .. '/stylua.toml',
       error_display_strategy = 'none',
     }
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = 'Kenja',
-      desc = 'Format Lua files before writing to disk',
-      pattern = '*.lua',
-      callback = function()
-        require('stylua-nvim').format_file()
-      end,
-    })
+
+    -- returns the formatter function
+    return function()
+      require('stylua-nvim').format_file()
+      vim.notify('Formatted lua file', vim.log.levels.INFO)
+    end
   end,
 }

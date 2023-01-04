@@ -2,14 +2,14 @@
 
 local options = {
   -- basic
-  updatetime = 100, -- wait time for CursorHold event and saving .swp
+  updatetime = 500, -- wait time for CursorHold event and saving .swp
   mouse = '',
 
   -- display
   number = true,
   relativenumber = true,
   scrolloff = 10,
-  signcolumn = 'yes',
+  signcolumn = 'auto:2',
 
   -- color
   termguicolors = true, -- use 24-bit colors instead of 8-bit

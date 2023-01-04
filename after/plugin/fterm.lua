@@ -1,4 +1,4 @@
--------- floating terminal config --------
+-------- fterm config --------
 
 local ft = require 'FTerm'
 
