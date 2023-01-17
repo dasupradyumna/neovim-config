@@ -20,7 +20,5 @@ require('kenja.utils.autocommand').command(
   'Kenja',
   { 'TextChanged', 'TextChangedI', 'CursorHold' },
   '*',
-  function()
-    lint.try_lint()
-  end
+  function() lint.try_lint() end
 )

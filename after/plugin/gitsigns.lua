@@ -13,9 +13,7 @@ local config = {
     local km = require 'kenja.utils.keymapper'
     local opts = { buffer = bufnr }
     km.nnoremap('<leader>gd', gs.diffthis, opts)
-    km.nnoremap('<leader>gD', function()
-      gs.diffthis 'HEAD'
-    end, opts)
+    km.nnoremap('<leader>gD', function() gs.diffthis 'HEAD' end, opts)
     km.nnoremap('<leader>gb', gs.show, opts)
     km.nnoremap('<leader>gl', gs.toggle_current_line_blame, opts)
     km.nnoremap('<leader>gp', gs.preview_hunk_inline, opts)

@@ -2,27 +2,16 @@
 
 local dap = require 'dap'
 
--- python
-dap.adapters.debugpy = {
-  type = 'executable',
-  command = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python',
-  args = { '-m', 'debugpy.adapter' },
-}
-dap.configurations.python = {
-  {
-    name = 'Debug current',
-    type = 'debugpy',
-    request = 'launch',
-    console = 'integratedTerminal',
-    pythonPath = function()
-      return (os.getenv 'CONDA_PREFIX' or os.getenv 'VIRTUAL_ENV' or '/usr') .. '/bin/python'
-    end,
-    program = '${file}',
-    stopOnEntry = true,
-    justMyCode = true,
-    showReturnValue = true,
-  },
-}
+-- load all language-specific debug configurations
+local daputil = require 'kenja.utils.dap'
+daputil.setup_configs(dap)
+require('kenja.utils.autocommand').command(
+  'Reload all configurations when tasks file is changed',
+  'Kenja',
+  'BufWritePost',
+  vim.fn.getcwd() .. '/tasks.lua',
+  function() daputil.setup_configs(dap) end
+)
 
 -- debug breakpoint signs TODO
 vim.fn.sign_define {
@@ -42,55 +31,67 @@ dapui.setup {
       position = 'left',
     },
     {
-      elements = { { id = 'repl', size = 0.5 }, { id = 'console', size = 0.5 } },
+      elements = { 'console' },
       size = 0.3,
       position = 'bottom',
     },
     {
+      elements = { 'repl' },
+      size = 0.25,
+      position = 'right',
+    },
+    {
       elements = { { id = 'stacks', size = 0.5 }, { id = 'breakpoints', size = 0.5 } },
-      size = 40,
+      size = 0.2,
       position = 'right',
     },
   },
-  expand_lines = false,
   controls = { enabled = false },
 }
 
 -- keybindings outside dap session
 local km = require 'kenja.utils.keymapper'
+km.nnoremap('<leader>dl', function() daputil.launch(dap) end)
 km.nnoremap('<leader>dc', dap.continue)
 km.nnoremap('<leader>db', dap.toggle_breakpoint)
-km.nnoremap('<leader>dB', function()
-  dap.set_breakpoint(vim.fn.input 'Breakpoint condition:')
-end)
+km.nnoremap('<leader>dB', function() dap.set_breakpoint(vim.fn.input 'Breakpoint condition:') end)
 
 -- automatically open/close dapui and map/unmap dap-specific keybindings inside dap session
 dap.listeners.after.event_initialized.dapui_config = function()
+  daputil.ui_visible = true
   dapui.open { layout = 1 }
   dapui.open { layout = 2 }
   km.nnoremap('<leader>dp', dap.pause)
   km.nnoremap('<leader>dn', dap.step_over)
   km.nnoremap('<leader>di', dap.step_into)
   km.nnoremap('<leader>do', dap.step_out)
-  km.nnoremap('<leader>dro', dap.repl.open)
-  km.nnoremap('<leader>drc', dap.repl.close)
+  km.nnoremap('<leader>dt', dap.terminate)
   km.nnoremap('<leader>dsu', dap.up)
   km.nnoremap('<leader>dsd', dap.down)
-  km.nnoremap('<leader>dt', dap.terminate)
-  km.nnoremap('<leader>dl', function()
-    dapui.toggle { layout = tonumber(vim.fn.getcharstr()) }
-  end)
+  -- toggle individual UI elements
+  km.nnoremap('<leader>duv', daputil.ui_element_toggler(dapui, 1))
+  km.nnoremap('<leader>duc', daputil.ui_element_toggler(dapui, 2))
+  km.nnoremap('<leader>dur', daputil.ui_element_toggler(dapui, 3))
+  km.nnoremap('<leader>dus', daputil.ui_element_toggler(dapui, 4))
+  -- toggle visibility of UI layout
+  km.nnoremap('<leader>dut', daputil.ui_visibility_toggler(dapui))
 end
 dap.listeners.after.event_terminated.dapui_config = function()
-  dapui.close {}
+  daputil.ui_visible = false
+  -- close all dap windows except console
+  dapui.close { layout = 1 }
+  dapui.close { layout = 3 }
+  dapui.close { layout = 4 }
   km.nunmap '<leader>dp'
   km.nunmap '<leader>dn'
   km.nunmap '<leader>di'
   km.nunmap '<leader>do'
-  km.nunmap '<leader>dro'
-  km.nunmap '<leader>drc'
+  km.nunmap '<leader>dt'
   km.nunmap '<leader>dsu'
   km.nunmap '<leader>dsd'
-  km.nunmap '<leader>dt'
-  km.nunmap '<leader>dl'
+  km.nunmap '<leader>duv'
+  km.nunmap '<leader>duc'
+  km.nunmap '<leader>dur'
+  km.nunmap '<leader>dus'
+  km.nunmap '<leader>dut'
 end

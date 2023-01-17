@@ -13,18 +13,14 @@ local function init(use)
   -- indent guides
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-      require('indent_blankline').setup { show_current_context = true }
-    end,
+    config = function() require('indent_blankline').setup { show_current_context = true } end,
   }
 
   -- code editing
   use 'tpope/vim-surround'
   use {
     'ggandor/leap.nvim',
-    config = function()
-      require('leap').add_default_mappings()
-    end,
+    config = function() require('leap').add_default_mappings() end,
   }
 
   -- floating terminal

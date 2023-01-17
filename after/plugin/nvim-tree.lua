@@ -26,7 +26,7 @@ local config = {
       info = '',
     },
   },
-  git = { show_on_open_dirs = false },
+  git = { ignore = false, show_on_open_dirs = false },
   -- custom key bindings within the NvimTree buffer
   on_attach = function(bufnr)
     km.nmap('<CR>', 'O', { buffer = bufnr })
@@ -41,9 +41,7 @@ local config = {
     group_empty = true,
     highlight_git = true,
     highlight_opened_files = 'icon',
-    root_folder_label = function(root)
-      return vim.fn.fnamemodify(root, ':~')
-    end,
+    root_folder_label = function(root) return vim.fn.fnamemodify(root, ':~') end,
     indent_markers = { enable = true },
     icons = { show = { folder_arrow = false, git = false } },
     special_files = {},

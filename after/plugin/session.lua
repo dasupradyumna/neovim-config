@@ -1,7 +1,7 @@
 -------- session manager config --------
 
 -- session options
-vim.opt.sessionoptions = 'buffers,curdir,folds,help,localoptions,options,tabpages,terminal,winsize,'
+vim.o.sessionoptions = 'buffers,curdir,folds,help,localoptions,options,tabpages,terminal,winsize,'
 
 -- configuration table
 local config = {
@@ -13,4 +13,5 @@ require('auto-session').setup(config)
 
 local sl = require 'session-lens'
 sl.setup()
+
 require('kenja.utils.keymapper').nnoremap('<leader>fa', sl.search_session)

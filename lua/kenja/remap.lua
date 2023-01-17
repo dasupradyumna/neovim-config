@@ -16,15 +16,15 @@ km.nnoremap('<leader>O', 'O<Esc>')
 km.nnoremap('K', 'i<CR><Esc>')
 
 -- access bash history
-km.nnoremap('<leader>bh', ':edit ~/.bash_history<CR>')
+km.nnoremap('<leader>bh', '<cmd>edit ~/.bash_history<CR>')
 
 -- system clipboard
 km.noremap('<leader>cc', '"+y')
 km.noremap('<leader>cp', '"+p')
 
 -- open terminal in split
-km.nnoremap('<leader>tv', ':vsplit term://bash<CR>')
-km.nnoremap('<leader>th', ':split term://bash<CR>')
+km.nnoremap('<leader>tv', '<cmd>vsplit term://bash<CR>')
+km.nnoremap('<leader>th', '<cmd>split term://bash<CR>')
 
 -- search
 km.nnoremap('n', 'nzz')
@@ -37,3 +37,17 @@ km.nnoremap('<C-h>', '<C-w>h')
 km.nnoremap('<C-j>', '<C-w>j')
 km.nnoremap('<C-k>', '<C-w>k')
 km.nnoremap('<C-l>', '<C-w>l')
+
+-- quickfix list
+km.nnoremap('<leader>qo', '<cmd>copen<CR>')
+km.nnoremap('<leader>qc', '<cmd>cclose<CR>')
+km.nnoremap('<leader>qn', '<cmd>cnext<CR>')
+km.nnoremap('<leader>qp', '<cmd>cprev<CR>')
+km.nnoremap('<leader>qh', '<cmd>chistory<CR>')
+
+-- location list
+km.nnoremap('<leader>lo', '<cmd>lopen<CR>')
+km.nnoremap('<leader>lc', '<cmd>lclose<CR>')
+km.nnoremap('<leader>ln', '<cmd>lnext<CR>')
+km.nnoremap('<leader>lp', '<cmd>lprev<CR>')
+km.nnoremap('<leader>lh', '<cmd>lhistory<CR>')

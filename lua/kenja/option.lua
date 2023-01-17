@@ -40,5 +40,5 @@ local options = {
 }
 
 for k, v in pairs(options) do
-  vim.opt[k] = v
+  vim.o[k] = v
 end

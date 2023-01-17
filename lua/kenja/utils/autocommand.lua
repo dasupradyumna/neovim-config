@@ -3,9 +3,7 @@
 local M = {}
 
 -- autogroup creation
-function M.group(name, clear)
-  vim.api.nvim_create_augroup(name, { clear = clear })
-end
+function M.group(name, clear) vim.api.nvim_create_augroup(name, { clear = clear }) end
 
 -- autocommand creation
 function M.command(desc, group, events, pattern, execute)

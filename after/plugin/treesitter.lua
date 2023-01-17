@@ -20,7 +20,15 @@ local config = {
     additional_vim_regex_highlighting = false,
   },
   indent = { enable = true },
-  -- incremental_selection = { enable = true }
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<CR>',
+      node_incremental = '<Tab>',
+      node_decremental = '<S-Tab>',
+      scope_incremental = '<CR>',
+    },
+  },
 }
 
 require('nvim-treesitter.configs').setup(config)

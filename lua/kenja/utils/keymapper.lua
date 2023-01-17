@@ -11,9 +11,7 @@ end
 
 -- unmap function for vim-like syntax
 local function unmap_binder(mode)
-  return function(lhs, opts)
-    vim.keymap.del(mode, lhs, opts)
-  end
+  return function(lhs, opts) vim.keymap.del(mode, lhs, opts) end
 end
 
 return {

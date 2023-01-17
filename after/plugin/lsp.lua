@@ -59,6 +59,11 @@ lsp.on_attach(function(_, bufnr)
   change_key('<F4>', 'ga', vim.lsp.buf.code_action)
 
   -- add new
+  km.nnoremap('gd', function()
+    vim.cmd.vsplit()
+    vim.lsp.buf.definition()
+  end, opts)
+  km.nnoremap('gD', vim.lsp.buf.definition, opts)
   km.nnoremap('gH', vim.lsp.buf.signature_help, opts)
   km.nnoremap('gR', vim.lsp.buf.references, opts)
   km.nnoremap('gs', vim.lsp.buf.document_symbol, opts)
