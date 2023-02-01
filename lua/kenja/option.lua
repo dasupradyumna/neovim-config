@@ -37,6 +37,9 @@ local options = {
   -- windows
   splitbelow = true,
   splitright = true,
+
+  -- diffmode
+  diffopt = 'filler,context:4,vertical,closeoff,hiddenoff,followwrap,internal',
 }
 
 for k, v in pairs(options) do

@@ -1,11 +1,12 @@
 -------- nvim-dap config --------
 
 local dap = require 'dap'
+local daputil = require 'kenja.utils.dap'
+local auto = require 'kenja.utils.autocommand'
 
 -- load all language-specific debug configurations
-local daputil = require 'kenja.utils.dap'
 daputil.setup_configs(dap)
-require('kenja.utils.autocommand').command(
+auto.command(
   'Reload all configurations when tasks file is changed',
   'Kenja',
   'BufWritePost',
@@ -49,12 +50,21 @@ dapui.setup {
   controls = { enabled = false },
 }
 
+auto.command('Set the wrap option only for DAP repl window', 'Kenja', 'BufEnter', '*', function()
+  if vim.o.filetype == 'dap-repl' then vim.o.wrap = true end
+end)
+
 -- keybindings outside dap session
 local km = require 'kenja.utils.keymapper'
 km.nnoremap('<leader>dl', function() daputil.launch(dap) end)
 km.nnoremap('<leader>dc', dap.continue)
-km.nnoremap('<leader>db', dap.toggle_breakpoint)
-km.nnoremap('<leader>dB', function() dap.set_breakpoint(vim.fn.input 'Breakpoint condition:') end)
+km.nnoremap('<leader>dbb', dap.toggle_breakpoint)
+km.nnoremap('<leader>dbc', function() dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ') end)
+km.nnoremap('<leader>dbl', function()
+  dap.list_breakpoints()
+  vim.cmd.copen()
+end)
+km.nnoremap('<leader>dbC', dap.clear_breakpoints)
 
 -- automatically open/close dapui and map/unmap dap-specific keybindings inside dap session
 dap.listeners.after.event_initialized.dapui_config = function()

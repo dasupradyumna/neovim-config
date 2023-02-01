@@ -11,8 +11,9 @@ return {
 
     -- returns the formatter function
     return function()
-      vim.fn.system(black .. ' ' .. vim.fn.expand '%')
-      vim.fn.system(isort .. ' --profile black ' .. vim.fn.expand '%')
+      local file = vim.fn.fnameescape(vim.fn.expand '%')
+      vim.cmd('silent !' .. black .. ' --quiet ' .. file)
+      vim.cmd('silent !' .. isort .. ' --quiet --profile black ' .. file)
       vim.notify('Formatted python file', vim.log.levels.INFO)
     end
   end,

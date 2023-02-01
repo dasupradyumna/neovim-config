@@ -1,8 +1,13 @@
 -------- telescope config --------
 
+local telescope = require 'telescope'
 local builtin = require 'telescope.builtin'
 local km = require 'kenja.utils.keymapper'
 
+telescope.setup {
+  defaults = { sorting_strategy = 'ascending' },
+  pickers = { buffers = { sort_mru = true } },
+}
 -- use git_files in a git repo, and find_files otherwise
 km.nnoremap('<leader>ff', function()
   if vim.fn.system 'git rev-parse --is-inside-work-tree 2>/dev/null' == '' then

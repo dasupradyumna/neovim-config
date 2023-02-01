@@ -3,7 +3,7 @@
 local M = {}
 
 -- returns the path to the current environment's python binary
-local function pythonPath()
+function M.pythonPath()
   return (os.getenv 'CONDA_PREFIX' or os.getenv 'VIRTUAL_ENV' or '/usr') .. '/bin/python'
 end
 
@@ -14,7 +14,7 @@ local templates = {
     subProcess = false, -- avoid debugpy's custom event "debugpyAttach" when starting subprocesses
     console = 'integratedTerminal',
     cwd = vim.fn.getcwd(),
-    pythonPath = pythonPath,
+    pythonPath = M.pythonPath,
     stopOnEntry = true,
     justMyCode = false,
     showReturnValue = true,
@@ -60,7 +60,7 @@ function M.setup_configs(dap)
 end
 
 -- text substitute all input blocks in arguments array
-local function substitute_args(input, args)
+function M.substitute_args(input, args)
   local stopped, i = false, 1
   while i <= #args and not stopped do
     local function sub_callback(var)
@@ -98,7 +98,7 @@ local function sub_args_and_run(dap, config)
     for i = 1, #config.args do -- restore unsubstituted arguments
       config.args[i] = config._args_unsub[i]
     end
-    if not substitute_args(dap.input, config.args) then
+    if not M.substitute_args(dap.input, config.args) then
       vim.notify 'Debug session launch cancelled.'
       return
     end

@@ -23,9 +23,6 @@ local function init(use)
     config = function() require('leap').add_default_mappings() end,
   }
 
-  -- floating terminal
-  use 'numToStr/FTerm.nvim'
-
   -- session management
   use { 'rmagatti/session-lens', requires = 'rmagatti/auto-session' }
 

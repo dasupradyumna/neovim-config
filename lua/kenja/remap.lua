@@ -20,9 +20,10 @@ km.nnoremap('<leader>bh', '<cmd>edit ~/.bash_history<CR>')
 
 -- system clipboard
 km.noremap('<leader>cc', '"+y')
+km.noremap('<leader>cx', '"+d')
 km.noremap('<leader>cp', '"+p')
 
--- open terminal in split
+-- open terminal
 km.nnoremap('<leader>tv', '<cmd>vsplit term://bash<CR>')
 km.nnoremap('<leader>th', '<cmd>split term://bash<CR>')
 
@@ -37,6 +38,12 @@ km.nnoremap('<C-h>', '<C-w>h')
 km.nnoremap('<C-j>', '<C-w>j')
 km.nnoremap('<C-k>', '<C-w>k')
 km.nnoremap('<C-l>', '<C-w>l')
+
+-- window resizing
+km.nnoremap('<C-Up>', '<cmd>resize +5<CR>')
+km.nnoremap('<C-Down>', '<cmd>resize -5<CR>')
+km.nnoremap('<C-Right>', '<cmd>vertical resize +5<CR>')
+km.nnoremap('<C-Left>', '<cmd>vertical resize -5<CR>')
 
 -- quickfix list
 km.nnoremap('<leader>qo', '<cmd>copen<CR>')

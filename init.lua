@@ -5,6 +5,7 @@ package.path = package.path .. ';' .. vim.fn.stdpath 'config' .. '/after/plugin/
 
 -- load user configurations
 require 'kenja.option'
-require 'kenja.plugin'
 require 'kenja.remap'
+require 'kenja.plugin'
 require 'kenja.autocommand'
+require 'kenja.taskrunner'
