@@ -15,4 +15,4 @@ require('auto-session').setup(config)
 local sl = require 'session-lens'
 sl.setup()
 
-require('kenja.utils.keymapper').nnoremap('<leader>fa', sl.search_session)
+require('kenja.utils.keymapper').nnoremap('<leader>tS', sl.search_session)

@@ -1,17 +1,22 @@
 -------- lsp-zero config --------
 
+-- mason
+require('mason').setup { ui = { border = 'rounded' } }
+
 local lsp = require 'lsp-zero'
 
 -- using preset
 lsp.preset 'recommended'
 lsp.set_preferences {
   setup_servers_on_start = true, -- TODO change to 'per-project' after workspace+session plugins
+  sign_icons = { info = '' },
 }
 
 -- language-specific configurations
 local format_funcs = {
   lua = require('language.lua').lsp_config(lsp),
   python = require('language.python').lsp_config(lsp),
+  sh = require('language.shell').lsp_config(lsp),
 }
 
 -- completion keybindings
@@ -40,11 +45,21 @@ do
     mapping[k] = nil
   end
 end
-lsp.setup_nvim_cmp { mapping = mapping }
+lsp.setup_nvim_cmp {
+  mapping = mapping,
+  sources = {
+    { name = 'buffer', keyword_length = 2 },
+    { name = 'path', keyword_length = 2 },
+    { name = 'luasnip', keyword_length = 2 },
+    { name = 'nvim_lsp', keyword_length = 2 },
+    { name = 'nvim_lua', keyword_length = 2 },
+  },
+}
 
 -- lsp keybindings
 lsp.on_attach(function(_, bufnr)
   local km = require 'kenja.utils.keymapper'
+  local telescope = require 'telescope.builtin'
   local opts = { silent = true, buffer = bufnr }
   local function change_key(old_key, new_key, behavior)
     km.nunmap(old_key, { buffer = bufnr })
@@ -52,22 +67,24 @@ lsp.on_attach(function(_, bufnr)
   end
 
   -- change existing
-  change_key('K', 'gh', vim.lsp.buf.hover)
   change_key('<F2>', 'gr', vim.lsp.buf.rename)
   change_key('[d', 'gn', vim.diagnostic.goto_next)
   change_key(']d', 'gN', vim.diagnostic.goto_prev)
   change_key('<F4>', 'ga', vim.lsp.buf.code_action)
 
   -- add new
-  km.nnoremap('gd', function()
+  -- TODO replace vim.lsp.defintion with telescope.builtin (currently buggy)
+  km.nnoremap('gh', vim.lsp.buf.hover, opts)
+  km.nnoremap('gd', vim.lsp.buf.definition, opts)
+  km.nnoremap('gD', function()
     vim.cmd.vsplit()
     vim.lsp.buf.definition()
   end, opts)
-  km.nnoremap('gD', vim.lsp.buf.definition, opts)
   km.nnoremap('gH', vim.lsp.buf.signature_help, opts)
-  km.nnoremap('gR', vim.lsp.buf.references, opts)
-  km.nnoremap('gs', vim.lsp.buf.document_symbol, opts)
-  km.nnoremap('gS', vim.lsp.buf.workspace_symbol, opts)
+  km.nnoremap('gR', telescope.lsp_references, opts)
+  km.nnoremap('gi', telescope.lsp_implementations, opts)
+  km.nnoremap('gs', telescope.lsp_document_symbols, opts)
+  km.nnoremap('gS', telescope.lsp_workspace_symbols, opts)
   km.nnoremap('gf', format_funcs[vim.fn.getbufvar(vim.fn.bufnr(), '&filetype')], opts)
 end)
 

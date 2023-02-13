@@ -10,6 +10,7 @@ local options = {
   relativenumber = true,
   scrolloff = 10,
   signcolumn = 'auto:2',
+  colorcolumn = '101',
 
   -- color
   termguicolors = true, -- use 24-bit colors instead of 8-bit

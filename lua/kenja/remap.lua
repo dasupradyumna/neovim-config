@@ -23,10 +23,6 @@ km.noremap('<leader>cc', '"+y')
 km.noremap('<leader>cx', '"+d')
 km.noremap('<leader>cp', '"+p')
 
--- open terminal
-km.nnoremap('<leader>tv', '<cmd>vsplit term://bash<CR>')
-km.nnoremap('<leader>th', '<cmd>split term://bash<CR>')
-
 -- search
 km.nnoremap('n', 'nzz')
 km.nnoremap('N', 'Nzz')

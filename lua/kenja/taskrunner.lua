@@ -115,6 +115,6 @@ require('kenja.utils.autocommand').command(
 )
 
 -- keybinding to run tasks
-require('kenja.utils.keymapper').nnoremap('<leader>tr', M.run_task)
+require('kenja.utils.keymapper').nnoremap('<leader>r', M.run_task)
 
 return M

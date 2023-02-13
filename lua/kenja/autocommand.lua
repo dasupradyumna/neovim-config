@@ -34,3 +34,15 @@ auto.command(
   vim.fn.stdpath 'config' .. '/lua/kenja/plugin.lua',
   'source % | PackerSync'
 )
+
+-- TODO add VimEnter event, since nvim-tree is not opened for a first-time-opened folder
+auto.command(
+  'Open nvim-tree on session load if there are no open files',
+  'Kenja',
+  'SessionLoadPost',
+  '*',
+  function()
+    local bufinfo = vim.fn.getbufinfo { buflisted = 1 }
+    if #bufinfo == 1 and bufinfo[1].name == '' then require('nvim-tree.api').tree.open {} end
+  end
+)

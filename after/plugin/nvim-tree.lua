@@ -8,7 +8,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- configuration table
 local config = {
-  open_on_setup = true,
   sort_by = 'name',
   hijack_cursor = true,
   sync_root_with_cwd = true,
@@ -23,13 +22,12 @@ local config = {
       error = '✘',
       warning = '▲',
       hint = '⚑',
-      info = '',
     },
   },
   git = { ignore = false, show_on_open_dirs = false },
   -- custom key bindings within the NvimTree buffer
   on_attach = function(bufnr)
-    km.nmap('<CR>', 'O', { buffer = bufnr })
+    km.nmap('<C-j>', 'O', { buffer = bufnr })
     km.nmap('=', '<C-]>', { buffer = bufnr })
     km.nmap('v', '<C-v>', { buffer = bufnr })
   end,
@@ -62,6 +60,6 @@ local config = {
 }
 
 -- toggle nvim-tree floating window
-km.nnoremap('<leader>fe', ':NvimTreeToggle<CR>', { silent = true })
+km.nnoremap('<leader>f', ':NvimTreeToggle<CR>', { silent = true })
 
 require('nvim-tree').setup(config)
